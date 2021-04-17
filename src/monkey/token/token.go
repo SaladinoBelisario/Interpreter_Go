@@ -19,12 +19,16 @@ const (
 	ASSIGN = "="
 	PLUS   = "+"
 
-	// Delimiters COMMA
+	// Delimiters
+	COMMA = ","
+	SEMICOLON = ";"
+
 	LPAREN = "("
 	RPAREN = ")"
 	LBRACE = "{"
 	RBRACE = "}"
 
-	// Keywords FUNCTION = "FUNCTION"
+	// Keywords
+	FUNCTION = "FUNCTION"
 	LET = "LET"
 )
