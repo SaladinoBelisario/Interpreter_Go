@@ -43,15 +43,80 @@ myArray[0] _// => 1_
 thorsten["name"] _// => "Thorsten"_
 ```
 
-The let statements can also be used to bind functions to names. Here’s a small function that adds two numbers: let add = fn(a, b) { return a + b; };
-But Monkey not only supports return statements. Implicit return values are also possible, which means we can leave out the return if we want to:
+The let statements can also be used to bind functions to names. Here’s a 
+small function that adds two numbers: 
+
+```c: 
+let add = fn(a, b) { return a + b; };
+```
+
+But Monkey not only supports return statements. Implicit return values are 
+also possible, which means we can leave out the return if we want to:
+
+```c: 
 let add = fn(a, b) { a + b; };
-And calling a function is as easy as you’d expect: add(1, 2);
-A more complex function, such as a fibonacci function that returns the Nth Fibonacci number, might look like this: let fibonacci = fn(x) { if (x == 0) { 0
-} else { if (x == 1) { 1
-} else { fibonacci(x - 1) + fibonacci(x - 2); } } }; Note the recursive calls to fibonacci itself!
-Monkey also supports a special type of functions, called higher order functions. These are functions that take other functions as arguments. Here is an example:
-let twice = fn(f, x) { return f(f(x));
+```
+
+And calling a function is as easy as you’d expect: 
+
+```c: 
+add(1, 2);
+```
+
+A more complex function, such as a fibonacci function that returns the 
+Nth Fibonacci number, might look like this: 
+
+```c: 
+let fibonacci = fn(x) { 
+    if (x == 0) { 
+        0
+    } else { 
+        if (x == 1) { 
+            1
+        } else { 
+            fibonacci(x - 1) + fibonacci(x - 2);
+        } 
+    } 
+}; 
+```
+
+>Note the recursive calls to fibonacci itself!
+
+Monkey also supports a special type of functions, called higher order 
+functions. These are functions that take other functions as arguments. 
+Here is an example:
+
+```c:
+let twice = fn(f, x) { 
+    return f(f(x));
 };
-let addTwo = fn(x) { return x + 2;
-}; twice(addTwo, 2); // => 6
+
+let addTwo = fn(x) { 
+    return x + 2;
+}; 
+
+twice(addTwo, 2); // => 6
+```
+
+The interpreter will implement all these features. It will tokenize 
+and parse Monkey source code in a REPL, building up an internal 
+representation of the code called abstract syntax tree and then
+evaluate this tree. It will have a few major parts:
+
+* The lexer 
+* The parser 
+* The Abstract Syntax Tree (AST) 
+* The internal object system 
+* The evaluator
+
+## Why Go?
+
+* Go is really easy to read and subsequently understand.
+* With Go’s universal formatting style thanks to gofmt and a testing 
+  framework built-in, we can concentrate on our interpreter and not 
+  worry about 3rd party libraries, tools and dependencies. 
+  
+## References:
+
+This work it's based on the book 
+>Writing an Interpreter in Go by Thorsten Ball
