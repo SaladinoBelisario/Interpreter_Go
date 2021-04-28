@@ -192,14 +192,14 @@ func TestErrorHandling(t *testing.T) {
 		},
 		{
 			`
-if (10 > 1) {
-  if (10 > 1) {
-    return true + false;
-  }
-
-  return 1;
-}
-`,
+				if (10 > 1) {
+				  if (10 > 1) {
+					return true + false;
+				  }
+				
+				  return 1;
+				}
+				`,
 			"unknown operator: BOOLEAN + BOOLEAN",
 		},
 		{
@@ -286,17 +286,17 @@ func TestFunctionApplication(t *testing.T) {
 
 func TestEnclosingEnvironments(t *testing.T) {
 	input := `
-let first = 10;
-let second = 10;
-let third = 10;
-
-let ourFunction = fn(first) {
-  let second = 20;
-
-  first + second + third;
-};
-
-ourFunction(20) + first + second;`
+			let first = 10;
+			let second = 10;
+			let third = 10;
+			
+			let ourFunction = fn(first) {
+			  let second = 20;
+			
+			  first + second + third;
+			};
+			
+			ourFunction(20) + first + second;`
 
 	testIntegerObject(t, testEval(input), 70)
 }
