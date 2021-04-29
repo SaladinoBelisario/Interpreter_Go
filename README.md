@@ -114,8 +114,27 @@ evaluate this tree. It will have a few major parts:
 * Go is really easy to read and subsequently understand.
 * With Go’s universal formatting style thanks to gofmt and a testing 
   framework built-in, we can concentrate on our interpreter and not 
-  worry about 3rd party libraries, tools and dependencies. 
+  worry about 3rd party libraries, tools and dependencies.
   
+## **REPL example**
+```
+$ go run main.go 
+Hello mrnugget! This is the Monkey programming language! 
+Feel free to type in commands 
+>> let people = [{"name": "Alice", "age": 24}, {"name": "Anna", "age": 28}]; 
+>> people[0]["name"]; 
+Alice
+>> people[1]["age"]; 
+28
+>> people[1]["age"] + people[0]["age"];
+52 
+>> let getName = fn(person) { person["name"]; };
+>> getName(people[0]);
+Alice 
+>> getName(people[1]); 
+Anna
+```  
+
 ## References:
 
 This work it's based on the book 
