@@ -16,6 +16,7 @@ const (
 	BOOLEAN_OBJ = "BOOLEAN"
 	RETURN_VALUE_OBJ = "RETURN_VALUE"
 	FUNCTION_OBJ = "FUNCTION"
+	STRING_OBJ = "STRING"
 )
 
 type Object interface {
@@ -47,6 +48,10 @@ type Function struct {
 	Env        *Environment
 }
 
+type String struct {
+	Value string
+}
+
 func (f *Function) Type() ObjectType { return FUNCTION_OBJ }
 func (b *Boolean) Type() ObjectType { return BOOLEAN_OBJ }
 func (b *Boolean) Inspect() string  { return fmt.Sprintf("%t", b.Value) }
@@ -58,6 +63,8 @@ func (e *Error) Type() ObjectType { return ERROR_OBJ }
 func (e *Error) Inspect() string  { return "ERROR: " + e.Message }
 func (i *Integer) Type() ObjectType { return INTEGER_OBJ }
 func (i *Integer) Inspect() string  { return fmt.Sprintf("%d", i.Value) }
+func (s *String) Type() ObjectType { return STRING_OBJ }
+func (s *String) Inspect() string { return s.Value }
 func (f *Function) Inspect() string {
 	var out bytes.Buffer
 
